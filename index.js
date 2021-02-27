@@ -1,4 +1,5 @@
 const pyodideNode = require('./src/PyodideNode');
+
 async function init() {
     try {
         console.log('loading language');
@@ -12,9 +13,13 @@ async function init() {
             'print(b)\n' +
             'print(a + b)\n'
         )
+        pyodide.runPython(`
+            import sys; print(sys.version)
+        `.trim())
         
     } catch (e) {
         console.log(`error: ${e}`);
     }
 }
+
 init();
